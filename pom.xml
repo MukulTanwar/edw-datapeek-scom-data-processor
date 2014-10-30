@@ -3,12 +3,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.expedia.edw.datapeek.dataProcessors</groupId>
-    <artifactId>splunkDataProcessor</artifactId>
+    <artifactId>scomDataProcessor</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>com.expedia.edw.datapeek.dataProcessors.splunkDataProcessor</name>
-    <url>https://github.com/ExpediaEDW/edw-datapeek-splunk-data-processor</url>
+    <name>com.expedia.edw.datapeek.dataProcessors.scomDataProcessor</name>
+    <url>https://github.com/ExpediaEDW/edw-datapeek-scom-data-processor</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -34,7 +34,7 @@
         <slf4j-version>1.7.5</slf4j-version>
         <surefire.version>2.16</surefire.version>
         <rpm-maven.version>2.1-alpha-3</rpm-maven.version>
-        <app.install.root>/opt/app/splunk-data-processor</app.install.root>
+        <app.install.root>/opt/app/scom-data-processor</app.install.root>
         <logdir.perms>755</logdir.perms>
         <dataProcessor.version>1.0.0-SNAPSHOT</dataProcessor.version>
     </properties>
@@ -81,7 +81,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>com.expedia.edw.datapeek.dataProcessors.splunkDataProcessor.App</mainClass>
+                            <mainClass>com.expedia.edw.datapeek.dataProcessors.scomDataProcessor.App</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -199,7 +199,7 @@
                 </executions>
             </plugin>
             
-			<plugin>
+			<!-- <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>rpm-maven-plugin</artifactId>
                 <version>${rpm-maven.version}</version>
@@ -215,14 +215,14 @@
                 </executions>
                 <configuration>
                     <group>edw</group>
-                    <description>Splunk Data Processor Service</description>
+                    <description>SCOM Data Processor Service</description>
                     <targetOS>noarch-any-linux</targetOS>
                     <copyright>Expedia</copyright>
                     <release>${BUILD_NUMBER}</release>
                     <version>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}</version>
                     <url>${GIT_URL}/commit/${GIT_COMMIT}</url>
                     <requires>
-                        <require>splunk-data-processor-config</require>
+                        <require>scom-data-processor-config</require>
                     </requires>
                     <mappings>
                         <mapping>
@@ -256,13 +256,13 @@
                             <directory>/etc/init</directory>
                             <sources>
                                 <softlinkSource>
-                                    <location>${app.install.root}/init/splunkdataprocessor.conf</location>
-                                    <destination>splunkdataprocessor.conf</destination>
+                                    <location>${app.install.root}/init/scomdataprocessor.conf</location>
+                                    <destination>scomdataprocessor.conf</destination>
                                 </softlinkSource>
                             </sources>
                         </mapping>
                         <mapping>
-                            <directory>/var/log/splunk-data-processor</directory>
+                            <directory>/var/log/scom-data-processor</directory>
                             <sources>
                                 <softlinkSource>
                                     <location>${app.install.root}/logs</location>
@@ -282,7 +282,7 @@
                         <script>/sbin/initctl reload-configuration</script>
                     </postremoveScriptlet>
                 </configuration>
-            </plugin>
+            </plugin> -->
         </plugins>
     </build>
 
