@@ -1,0 +1,27 @@
+# Eclipse
+.classpath
+.project
+.metadata
+.settings/
+.checkstyle
+
+# Intellij
+.idea/
+*.iml
+*.iws
+
+# Mac
+.DS_Store
+
+# Build specific
+logs/
+target/
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+
+# Maven
+dependency-reduced-pom.xml
