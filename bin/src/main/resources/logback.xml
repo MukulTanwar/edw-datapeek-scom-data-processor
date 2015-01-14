@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright 2012 Expedia, Inc. All rights reserved.
+  ~ EXPEDIA PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+  -->
+<configuration>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg\r\n</Pattern>
+        </layout>
+    </appender>
+    
+    <appender name="ROLLINGMETRICS" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+            <pattern>%date{yyyy-MM-dd HH:mm:ss.SSS}|%msg\r\n</pattern>
+        </encoder>      
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy"> 
+            <fileNamePattern>${user.dir}/logs/scomdataprocessor-%d{yyyy-MM-dd}.log</fileNamePattern>
+            
+            <maxHistory>3</maxHistory>
+        </rollingPolicy>      
+    </appender>
+    
+    <appender name="ROLLINGERRORS" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+            <pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{35} - %msg\r\n</pattern>
+        </encoder>      
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy"> 
+            <fileNamePattern>${user.dir}/logs/error-scomdataprocessor-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>3</maxHistory>
+        </rollingPolicy>      
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+    
+    <root level="error">
+        <appender-ref ref="ROLLINGERRORS"/>
+    </root>
+    
+    <root level="debug">
+        <appender-ref ref="STDOUT"/>
+    </root>
+    
+    <logger name="org.apache.zookeeper.ClientCnxn" level="info">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    
+    <logger name="com.expedia.edw.datapeek.common.logging.Stopwatcher.Metrics" level="info">
+        <appender-ref ref="ROLLINGMETRICS"/>
+    </logger>
+</configuration>

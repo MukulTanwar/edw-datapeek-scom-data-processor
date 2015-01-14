@@ -1,0 +1,88 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.expedia.edw.datapeek</groupId>
+    <artifactId>scom-data-processor-config-${deploy.env}</artifactId>
+    <version>1.0.0</version>
+    <packaging>rpm</packaging>
+
+    <name>com.expedia.edw.datapeek.scom-data-processor-config-${deploy.env}</name>
+    <url>https://github.com/ExpediaEDW/edw-scom-data-processor</url>
+
+    <properties>
+        <rpm-maven.version>2.1-alpha-3</rpm-maven.version>
+    </properties>
+
+
+    <build>
+        <finalName>scom-data-processor-config-${deploy.env}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>1.8</version>
+                <executions>
+                    <execution>
+                        <id>parse-version</id>
+                        <goals>
+                            <goal>parse-version</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin> 
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>rpm-maven-plugin</artifactId>
+                <version>${rpm-maven.version}</version>
+                <extensions>true</extensions>
+                <executions>
+                    <execution>
+                        <id>generate-rpm</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>rpm</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <group>edw</group>
+                    <description>Scom Data Processor Service Configuration for ${deploy.env} Environment</description>
+                    <targetOS>noarch-any-linux</targetOS>
+                    <copyright>Expedia</copyright>
+                    <release>${BUILD_NUMBER}</release>
+                    <version>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}</version>
+                    <url>https://github.com/ExpediaEDW/edw-datapeek-scom-data-processor</url>
+                    <provides>
+                        <provide>scom-data-processor-config</provide>
+                    </provides>
+                    <mappings>
+                        <mapping>
+                            <directory>/opt/app/scom-data-processor/conf</directory>
+                            <directoryIncluded>true</directoryIncluded>
+                            <configuration>true</configuration>
+                            <sources>
+                                <source>
+                                    <location>dataprocessor.properties</location>
+                                </source>
+                            </sources>
+                        </mapping>
+                    </mappings>
+                </configuration>
+            </plugin> 
+        </plugins>
+    </build>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>edw-snapshots</id>
+            <name>EDW Snapshots Repository</name>
+            <url>http://nexus.sb.karmalab.net/nexus/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>edw-release</id>
+            <name>EDW Release Repository</name>
+            <url>http://nexus.sb.karmalab.net:8080/nexus/content/repositories/releases</url>
+        </repository>
+    </distributionManagement>
+</project>

@@ -1,0 +1,88 @@
+{
+    "id": 0,
+    "properties": [{
+        "id": 0,
+        "property": {
+            "name": "interval",
+            "dataType": "Integer",
+            "desc": "Frequency of data collection in seconds.",
+            "validation": "[0-9]+",
+            "uniqueNamePart": true,
+            "active": true,
+            "required": true,
+            "typeId": 0,
+            "key": 0
+        }
+    }, {
+        "id": 0,
+        "property": {
+            "name": "nextInterval",
+            "dataType": "Integer",
+            "desc": "The start timestamp of the next collection interval.",
+            "validation": "[0-9]+",
+            "uniqueNamePart": false,
+            "active": true,
+            "required": true,
+            "typeId": 0,
+            "key": 0
+        }
+    }, {
+        "id": 0,
+        "property": {
+            "dataType": "Integer",
+            "desc": "Delay of data collection in seconds.",
+            "validation": "[0-9]+",
+            "name": "delay",
+            "uniqueNamePart": true,
+            "active": true,
+            "required": true,
+            "typeId": 0,
+            "key": 0
+        }
+    }, {
+        "id": 0,
+        "property": {
+            "dataType": "Integer",
+            "desc": "Priority of data collection (lower numbers are higher priority).",
+            "validation": "[0-9]+",
+            "name": "priority",
+            "uniqueNamePart": false,
+            "active": true,
+            "required": true,
+            "typeId": 0,
+            "key": 0
+        }
+    }, {
+        "id": 0,
+        "property": {
+            "dataType": "String",
+            "desc": "Scom query to execute.",
+            "validation": ".*",
+            "name": "scomQuery",
+            "uniqueNamePart": false,
+            "active": true,
+            "required": true,
+            "typeId": 0,
+            "key": 0
+        }
+    }, {
+        "id": 0,
+        "property": {
+            "dataType": "String",
+            "desc": "Name of the service being measured.",
+            "validation": ".*",
+            "name": "serviceName",
+            "uniqueNamePart": true,
+            "active": true,
+            "required": false,
+            "typeId": 0,
+            "key": 0
+        }
+    }],
+    "type": 1,
+    "name": "Scom",
+    "description": "Monitor Type for Scom Queries, executed by Chieftain and the Scom Data Processor",
+    "active": true
+}
+
+

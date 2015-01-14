@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+
+	<general>
+    
+        <defaultTableName>0</defaultTableName>
+        
+		<aliasing>
+			<max-recursive-count>5</max-recursive-count>
+		</aliasing>
+	</general>
+
+	<datetime>
+		<!-- 
+			The datetime format for parsing a string into a DateTime, and generating a string from DateTime. If no format is specified, default
+			will be used. 
+			
+			The default is the ISODateTimeFormat, the format yyyy-MM-dd'T'HH:mm:ss.SSSZZ
+		-->
+		<!--
+		<format>yyyy-MM-dd'T'HH:mm:ss.SSSZZ</format>
+		-->
+		<!--
+			DateTime Locale, possible values are IETF BCP 47 language tag string. 
+		-->
+		<!--
+		<locale></locale>
+		-->
+		<column-name>_time</column-name>
+	</datetime>
+
+	<datasource>
+		
+		<modulesToLoad>
+			MockLarge, Mock, SOLR, Cassandra, Direct, JDBC, Net, Table
+		</modulesToLoad>
+	
+		<module>
+			<Direct>
+				<ClassURI>com.expedia.e3.qm.crunch.core.DataSource.DirectDataSource</ClassURI>
+			</Direct>
+		</module>
+		<module>
+			<Table>
+				<ClassURI>com.expedia.e3.qm.crunch.core.DataSource.TableDataSource</ClassURI>
+			</Table>
+		</module>
+		<module>
+			<MockLarge>
+				<ClassURI>com.expedia.e3.qm.crunch.core.DataSource.MockLargeDataSource</ClassURI>
+			</MockLarge>
+		</module>
+		<module>
+			<Mock>
+				<ClassURI>com.expedia.e3.qm.crunch.core.DataSource.MockDataSource</ClassURI>
+			</Mock>
+		</module>
+		<module>
+			<SOLR>
+				<ClassURI>com.expedia.e3.qm.crunch.core.DataSource.SOLRDataSource</ClassURI>
+			</SOLR>
+		</module>
+		<module>
+			<JDBC>
+				<ClassURI>com.expedia.e3.qm.crunch.core.DataSource.JDBCDataSource</ClassURI>
+			</JDBC>
+		</module>
+		<module>
+			<Net>
+				<ClassURI>com.expedia.e3.qm.crunch.core.DataSource.NetDataSource</ClassURI>
+			</Net>
+		</module>
+		<module>
+			<Cassandra>
+				<ClassURI>com.expedia.e3.qm.crunch.core.DataSource.CassandraDataSource</ClassURI>
+			</Cassandra>
+		</module>
+	</datasource>
+
+	
+	
+	<datacache>
+	
+		<defaultModule>MultiCache</defaultModule>
+		<alwaysCacheDataSource>false</alwaysCacheDataSource>
+		<cacheTTL>-1</cacheTTL>
+		<cacheMaxAge>-1</cacheMaxAge>
+	
+		<modulesToLoad>
+			
+		</modulesToLoad>
+	
+		<module>
+			<MultiCache>
+				<ClassURI>com.expedia.e3.qm.crunch.core.DataCache.MultiCacheDataCache</ClassURI>
+				<ConfigSharedFolder>http://cheljvamc01/MCShare</ConfigSharedFolder>
+				<ConfigCacheFolder>MultiCache.cache=/MultiCache/Cache</ConfigCacheFolder>
+				<CacheName>Crunch.SLA.Calculation</CacheName>
+			</MultiCache>
+		</module>
+	</datacache>
+</configuration>

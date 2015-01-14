@@ -1,0 +1,28 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.expedia.edw.datapeek</groupId>
+    <artifactId>scom-data-processor-config</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+
+    <name>com.expedia.edw.datapeek.scom-data-processor-config</name>
+    <url>https://github.com/ExpediaEDW/edw-datapeek</url>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.sourceEncoding>UTF-8</project.reporting.sourceEncoding>
+        <jdk.version>1.7</jdk.version>
+        <targetJdk.version>${jdk.version}</targetJdk.version>
+    </properties>
+
+    <modules>
+        <module>local</module>
+        <module>test</module>
+        <module>dev</module>
+        <module>maui</module>
+        <module>chandler</module>
+    </modules>
+
+</project>
